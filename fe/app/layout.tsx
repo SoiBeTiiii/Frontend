@@ -1,8 +1,9 @@
 import "./globals.css";
 import Slider from "./components/Slider";
-import ProductListSlider from "./components/ProductListSlider";
-
+import BannerSlider from "./components/BannerSlider";
 import HeaderSearch from "./components/HeaderSearch";
+import IntroSlider from "./components/IntroSlider";
+import Footer from "./components/Footer";
 export const metadata = {
   title: "My Mantine app",
   description: "I have followed setup instructions carefully",
@@ -19,11 +20,13 @@ export default function RootLayout({
       </head>
       <body>
           <HeaderSearch /> 
-          <Slider />
+          <IntroSlider />
+          {/* Uncomment the line below to use the BannerSlider component */}
+          {/* <BannerSlider /> */}
+          {/* Uncomment the line below to use the Slider component */}
+          {/* <Slider /> */}
           {children}
-                     <ProductListSlider />
-                     <ProductListSlider />
-
+          <Footer />
       </body>
     </html>
   );

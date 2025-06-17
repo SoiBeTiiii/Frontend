@@ -1,9 +1,17 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import pop from "../app/css/Popular.module.css";
-
+import ProductListSlider from "./components/ProductListSlider";
+import ServiceInfo from './components/ServiceInfo';
+import BannerSlider from './components/BannerSlider';
+import SuggestList from './components/SuggestList';
+import BrandSlider from './components/BrandSlider';
+import NewsSection from './components/NewsSection';
 export default function Home() {
   return (
+    <div>
+    
+   
    <div className={pop.container}>
       <div className={pop.title}>
         <h2>Danh mục sản phẩm</h2>
@@ -47,7 +55,16 @@ export default function Home() {
           <p>Trang điểm</p>
         </div>
       </div>
+     
 
     </div>
+     <ProductListSlider />
+      <ProductListSlider />
+      <ServiceInfo />
+      {/* <BannerSlider /> */}
+      <SuggestList />
+      <BrandSlider />
+      <NewsSection />
+     </div>
   );
 }

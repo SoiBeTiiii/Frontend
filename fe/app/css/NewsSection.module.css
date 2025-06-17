@@ -1,0 +1,33 @@
+.section {
+  text-align: center;
+  padding: 48px 16px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.button {
+  margin-top: 32px;
+  padding: 12px 24px;
+  background-color: #f07cb0;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #db69a0;
+}
