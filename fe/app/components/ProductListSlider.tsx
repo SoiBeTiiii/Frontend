@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import styles from '../css/ProductListSlider.module.css';
+import ButtonFromIntro from '../css/IntroSlider.module.css'
 
 const products = new Array(12).fill(0).map((_, i) => ({
   name: 'Kem Tẩy Trang Whoo Gongjinhyang Facial Cream Cleanser 210ml ...',
@@ -22,12 +23,7 @@ export default function ProductListSlider() {
   const next = () => setPage((prev) => (prev + 1) % totalPages);
   const prev = () => setPage((prev) => (prev - 1 + totalPages) % totalPages);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 5000); // tự chạy mỗi 5s
-    return () => clearInterval(interval);
-  }, []);
+
 
   const visibleProducts = products.slice(
     page * ITEMS_PER_PAGE,
@@ -36,13 +32,17 @@ export default function ProductListSlider() {
 
   return (
     <div className={styles.wrapper}>
-      <button className={styles.arrow} onClick={prev}>←</button>
+      
       <div className={styles.grid}>
         {visibleProducts.map((p, i) => (
           <ProductCard key={i} {...p} />
         ))}
       </div>
-      <button className={styles.arrow} onClick={next}>→</button>
+      <div className={styles.controls}>
+    <button className={styles.arrow} onClick={prev}>←</button>
+    <button className={ButtonFromIntro.button}>Xem Thêm</button>
+    <button className={styles.arrow} onClick={next}>→</button>
+  </div>
     </div>
   );
 }
