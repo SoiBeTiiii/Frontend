@@ -21,20 +21,26 @@
 }
 
 .logo {
+  margin-left: 8%;
   font-size: 24px;
   font-weight: bold;
   color: #000;
 }
 
+.searchBox {
+  position: relative; /* Thêm dòng này */
+}
+
 .searchBox input {
-  width: 300px;
+  width: 400px;
   color: black;
-  padding: 8px 12px;
+  padding: 8px 12px 8px 36px; /* đẩy text sang phải để không đè icon */
   border-radius: 20px;
   border: 1px solid #ddd;
   background-color: #f3f3f3;
   font-size: 14px;
 }
+
 
 .iconList {
   display: flex;
@@ -55,11 +61,12 @@
 
 .nav {
   background-color: #ff66a6;
-  padding: 8px 20px;
+  padding: 10px 20px;
+  position: relative;
+  z-index: 100;
 }
 
 .nav ul {
-    justify-content: center ;
   display: flex;
   list-style: none;
   gap: 30px;
@@ -68,4 +75,97 @@
   font-size: 14px;
   color: white;
   font-weight: 500;
+  justify-content: center;
+}
+
+.navItem {
+  /* position: relative; */
+  position: static;
+  cursor: pointer;
+}
+
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+    width: 100vw;
+
+  right: 0;
+  width: 100vw; /* full chiều ngang */
+  background-color: #ff66a6;
+  display: flex;
+  gap: 60px;
+  padding: 30px 80px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.navItem:hover .megaMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Cột bên trong Mega Menu */
+.megaColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  min-width: 180px;
+}
+
+.megaColumn h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+.column {
+  flex: 1;
+}
+
+.column h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.column p {
+  font-size: 13px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.column p:hover {
+  color: #ff66a6;
+}
+
+.imageWrapper {
+  width: 200px;
+}
+
+.imageWrapper img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.iconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #000;
+  gap: 4px;
+}
+
+.iconItem :global(svg) {
+  font-size: 20px;
 }

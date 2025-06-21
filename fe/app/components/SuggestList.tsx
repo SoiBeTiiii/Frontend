@@ -11,9 +11,10 @@ const products = new Array(12).fill(0).map((_, i) => ({
   image: 'images/prop.webp',
   sold: 30,
   discount: 57,
+  rating: 4.5, // Add a default rating value
 }));
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 8;
 
 export default function ProductListSlider() {
   const [page, setPage] = useState(0);
