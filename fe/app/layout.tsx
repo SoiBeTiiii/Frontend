@@ -20,7 +20,7 @@ export default function RootLayout({
       </head>
       <body>
           <HeaderSearch /> 
-          <IntroSlider />
+          {/* <IntroSlider /> */}
           {/* Uncomment the line below to use the BannerSlider component */}
           {/* <BannerSlider /> */}
           {/* Uncomment the line below to use the Slider component */}

@@ -13,12 +13,12 @@ const services = [
     description: 'Không thích? Trả lại hoặc đổi hàng của bạn miễn phí trong vòng 30 ngày',
   },
   {
-    // icon: '/icons/gift.svg',
-    // title: 'Voucher & quà tặng tri ân',
+    icon: 'images/icons/voucher.png',
+    title: 'Voucher & quà tặng tri ân',
     description: 'Luôn tặng kèm voucher & quà tặng cho khách hàng mới và khách hàng thân thiết',
   },
   {
-    // icon: '/icons/authentic.svg',
+    icon: 'images/icons/quality.png',
     title: 'Cam kết chính hãng',
     description: 'Shop cam kết sản phẩm chính hãng, nhập khẩu 100% từ hãng',
   },

@@ -3,15 +3,15 @@
   flex-direction: column; /* Hiển thị theo cột: grid trên, arrow dưới */
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 8px;
   padding: 20px;
-  background: linear-gradient(to bottom, #ff66a6, #e095ae, #ff66a6);
+  background: linear-gradient(to bottom, #ff66a6, #e095ae);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);/**/
+  /* gap: 5px; */
 }
 
 .controls {
