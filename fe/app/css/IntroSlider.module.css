@@ -64,7 +64,7 @@
 }
 
 .mainImage {
-  width: 640px;
+  /* width: auto; */
   height: 360px;
   object-fit: fill;
   border-radius: 12px;

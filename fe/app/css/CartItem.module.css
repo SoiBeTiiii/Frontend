@@ -1,0 +1,66 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 80px;
+  border-radius: 8px;
+}
+
+.details {
+  flex: 1;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.option {
+  display: inline-block;
+  font-size: 12px;
+  background: #eee;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 4px 0;
+}
+
+.quantity {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.quantity button {
+    color: black    ;
+  padding: 2px 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.quantity input {
+    background-color: white;
+    color: black;
+  width: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.price {
+  text-align: right;
+  min-width: 100px;
+}
+
+.price strong {
+  color: #000;
+  display: block;
+}
+
+.price s {
+  color: gray;
+  font-size: 13px;
+}

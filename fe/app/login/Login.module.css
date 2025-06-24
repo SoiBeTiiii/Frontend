@@ -2,56 +2,128 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(to right, #ffe3ec, #fad0c4);
   min-height: 100vh;
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
   padding: 20px;
 }
 
-.form {
+.card {
   background-color: white;
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 400px;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
 }
 
-.title {
-  font-size: 24px;
+.leftPanel {
+  background: linear-gradient(to bottom right, #f48fb1, #f06292);
+  color: white;
+  padding: 40px;
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.leftPanel h1 {
+  font-size: 32px;
   font-weight: bold;
+}
+
+.leftPanel p {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.leftPanel img {
+  max-width: 100%;
+  margin-top: auto;
+}
+
+.form {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form h2 {
+  font-size: 28px;
   color: #f06292;
-  text-align: center;
+  margin-bottom: 12px;
 }
 
 .input {
-  padding: 12px 16px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   outline: none;
-  transition: border 0.2s;
+  transition: 0.3s;
 }
 
 .input:focus {
   border-color: #f06292;
+  box-shadow: 0 0 0 2px rgba(240, 98, 146, 0.2);
 }
 
 .button {
   background-color: #f06292;
   color: white;
-  padding: 12px;
   border: none;
-  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
   font-weight: bold;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.3s ease;
 }
 
 .button:hover {
-  background-color: #ec407a;
+  background-color: #e91e63;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+}
+
+.google,
+.facebook {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.google {
+  background: white;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.facebook {
+  background-color: #1877f2;
+  color: white;
+}
+
+.google:hover {
+  background-color: #f2f2f2;
+}
+
+.facebook:hover {
+  background-color: #145dbf;
 }
 
 .links {
@@ -68,41 +140,19 @@
 .links a:hover {
   text-decoration: underline;
 }
-.socials {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
-}
 
-.google, .facebook {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+  }
 
-.google {
-  background-color: white;
-  border: 1px solid #ccc;
-  color: #444;
-}
+  .leftPanel {
+    padding: 30px;
+    text-align: center;
+  }
 
-.facebook {
-  background-color: #1877f2;
-  color: white;
-}
-
-.google:hover {
-  background-color: #f5f5f5;
-}
-
-.facebook:hover {
-  background-color: #145fcb;
+  .form {
+    padding: 30px;
+  }
 }

@@ -27,14 +27,13 @@ export default function ProfilePage() {
         <div className={styles.card}>
           <div className={styles.avatar}>👤</div>
           <strong>Hoài Nam Nam</strong>
-          <div className={styles.phone}>SĐT tích điểm: {form.phone}</div>
         </div>
         <nav className={styles.menu}>
           <a className={styles.active}>Tài khoản</a>
           <a>Đơn hàng</a>
           <a>Địa chỉ giao nhận</a>
           <a>Ưu đãi của tôi</a>
-          <a>Câu hỏi của tôi</a>
+          <a>Đổi mật khẩu</a>
         </nav>
       </aside>
 

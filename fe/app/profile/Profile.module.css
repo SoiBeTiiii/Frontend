@@ -77,20 +77,29 @@
   gap: 20px;
 }
 
-label {
+.label {
   display: block;
   margin-bottom: 6px;
   font-size: 14px;
   font-weight: 500;
 }
-
-input {
+.grid input {
   width: 100%;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  transition: border 0.2s, box-shadow 0.2s;
+  color: black;
 }
+
+.grid input:focus {
+  border-color: #f06292;
+  box-shadow: 0 0 0 2px rgba(240, 98, 146, 0.2);
+  outline: none;
+}
+
 
 .saveButton {
   align-self: flex-end;
