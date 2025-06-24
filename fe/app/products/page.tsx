@@ -1,18 +1,25 @@
 'use client';
 import styles from "./products.module.css";
-import React from "react";
 import ProductCard from "../components/ProductCard";
+import React, { useEffect, useState } from 'react';
+import { fetchProducts } from "../../lib/productApi"
+import ProductCardProps from "../interface/ProductCardProps";
 
-const products = new Array(12).fill(0).map((_, i) => ({
-  name: 'Kem Tẩy Trang Whoo Gongjinhyang Facial Cream Cleanser 210ml ...',
-  price: 650000,
-  originalPrice: 880000,
-  image: 'images/prop.webp',
-  sold: 30,
-  discount: 57,
-}));
+
+
+
+
 
 export default function ProductsPage() {
+    const [products, setProducts] = useState<ProductCardProps[]>([]);
+      useEffect(() => {
+    fetchProducts()
+      .then(setProducts)
+      .catch((err) => {
+        console.error("Lỗi khi fetch sản phẩm:", err);
+      });
+  }, []);
+
     return (
         <>
             <section className={styles["product-page"]}>
@@ -73,15 +80,17 @@ export default function ProductsPage() {
                     </div>
 
                     <div className={styles["product-grid"]}>
-                        {products.map((product, idx) => (
+                        {products.map((product, index) => (
                             <ProductCard
-                                key={idx}
+                                key={index}
+                                slug={product.slug}
                                 name={product.name}
                                 price={product.price}
                                 originalPrice={product.originalPrice}
                                 image={product.image}
                                 sold={product.sold}
                                 discount={product.discount}
+                                rating={product.rating ?? 0}
                             />
                         ))}
                     </div>

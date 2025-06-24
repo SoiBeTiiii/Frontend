@@ -3,8 +3,10 @@ import { FaShoppingCart } from 'react-icons/fa';
 import styles from '../css/ProductCard.module.css';
 import ProductCardProps from '../interface/ProductCardProps';
 import Link from 'next/link';
+import { slugify } from "../utils/slug"
 
 export default function ProductCard({
+  
   name,
   price,
   originalPrice,
@@ -12,8 +14,11 @@ export default function ProductCard({
   sold,
   discount,
 }: ProductCardProps) {
+   const slug = slugify(name ?? "");
+
+  
   return (
-    <Link href='/products/productsDetail'>
+    <Link href={`/products/${slug}`}>
     <div className={styles.card}>
       <span className={styles.discount}>-{discount}%</span>
       <img src={image} alt={name} className={styles.image} />
@@ -22,9 +27,9 @@ export default function ProductCard({
       <h3 className={styles.name}>{name}</h3>
 
       <p className={styles.price}>
-        {price.toLocaleString()}₫{' '}
+        {(price !== undefined ? price.toLocaleString() : '0')}₫{' '}
         <span className={styles.original}>
-          {originalPrice.toLocaleString()}₫
+          {originalPrice !== undefined ? originalPrice.toLocaleString() : '0'}₫
         </span>
       </p>
 
