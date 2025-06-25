@@ -1,17 +1,52 @@
-'use client';
-import { useState } from 'react';
-import styles from './Login.module.css';
-import { FaGoogle, FaFacebookF } from 'react-icons/fa';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import styles from "./Login.module.css";
+import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import Link from "next/link";
+import { getSocialRedirectUrl, login } from "../../lib/authApi";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+const handleSocialLogin = async (provider: 'google' | 'facebook') => {
+  try {
+    const url = await getSocialRedirectUrl(provider);
+    if (url) {
+      window.location.href = url;
+    } else {
+      alert("Không lấy được URL đăng nhập từ server");
+    }
+  } catch (err) {
+    alert("Lỗi khi gọi API social login");
+    console.error(err);
+  }
+};
+
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+    try {
+      const res = await login(email, password);
+
+      // Narrow the type of res before accessing its properties
+      if (typeof res === "object" && res !== null && "success" in res) {
+        if ((res as { success: boolean; message?: string }).success) {
+          // Cookie đã được Laravel set rồi, không cần token
+          router.push("/");
+        } else {
+          alert("Đăng nhập thất bại: " + (res as { message?: string }).message);
+        }
+      } else {
+        alert("Đăng nhập thất bại: Phản hồi không hợp lệ");
+      }
+    } catch (err) {
+      alert("Đăng nhập thất bại");
+      console.error(err);
+    }
   };
 
   return (
@@ -48,10 +83,18 @@ export default function LoginPage() {
           </button>
 
           <div className={styles.socials}>
-            <button type="button" className={styles.google}>
+            <button
+              type="button"
+              className={styles.google}
+              onClick={() => handleSocialLogin("google")}
+            >
               <FaGoogle /> Google
             </button>
-            <button type="button" className={styles.facebook}>
+            <button
+              type="button"
+              className={styles.facebook}
+              onClick={() => handleSocialLogin("facebook")}
+            >
               <FaFacebookF /> Facebook
             </button>
           </div>
