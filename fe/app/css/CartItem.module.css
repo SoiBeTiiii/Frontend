@@ -64,3 +64,30 @@
   color: gray;
   font-size: 13px;
 }
+.quantity button,
+.removeBtn {
+  background-color: #eee;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 16px;
+  transition: background-color 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+.quantity button:hover {
+  background-color: #d81b60;
+  color: white;
+}
+
+.removeBtn {
+  margin-left: 12px;
+  background-color: transparent;
+  color: #888;
+}
+
+.removeBtn:hover {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+

@@ -55,7 +55,8 @@ const handleSocialLogin = async (provider: 'google' | 'facebook') => {
         <div className={styles.leftPanel}>
           <h1>Chào mừng trở lại 👋</h1>
           <p>Khám phá các sản phẩm làm đẹp mới nhất từ EGOMall!</p>
-          <img src="/images/login-illustration.svg" alt="Welcome" />
+
+           <Link href='/'> Trang chủ </Link> 
         </div>
 
         <form onSubmit={handleLogin} className={styles.form}>

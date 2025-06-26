@@ -1,4 +1,5 @@
 export default interface ProductCardProps {
+  id: number;
   slug: string;
   name?: string;
   image?: string;

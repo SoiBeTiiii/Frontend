@@ -11,7 +11,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const hideLayout =
     pathname === '/login' ||
     pathname === '/register' ||
-    pathname === '/forgot-password';
+    pathname === '/forgot-password' ||
+    pathname === '/verify-otp';
 
   return (
     <>

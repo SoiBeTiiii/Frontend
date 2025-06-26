@@ -9,7 +9,7 @@ export const login = async (email: string, password: string) => {
       password,
     },
     {
-      withCredentials: true, // 👈 Bắt buộc để Laravel trả cookie
+      withCredentials: true, 
     }
   );
 

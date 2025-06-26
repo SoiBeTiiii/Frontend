@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import pop from "../app/css/Popular.module.css";
+import PopularCategories from "./components/PopularCategory";
 import ProductListSlider from "./components/ProductListSlider";
 import ServiceInfo from "./components/ServiceInfo";
 import BannerSlider from "./components/BannerSlider";
@@ -13,50 +13,7 @@ export default function Home() {
     <div>
       <IntroSlider />
 
-      <div className={pop.container}>
-        <div className={pop.title}>
-          <h2>Danh mục sản phẩm</h2>
-        </div>
-
-        <div className={pop.list}>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-          <div className={pop.item}>
-            <img src="../images/flash.png" alt="" />
-            <p>Trang điểm</p>
-          </div>
-        </div>
-      </div>
+      <PopularCategories /> 
 
       <ProductListSlider />
       {/* <ProductListSlider /> */}

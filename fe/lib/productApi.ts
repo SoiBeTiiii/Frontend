@@ -16,6 +16,7 @@ export const fetchProducts = async (): Promise<ProductCardProps[]> => {
     const discount = originalPrice && price ? Math.round(100 - (price * 100) / originalPrice) : 0;
 
     return {
+      id: item.id,
       slug: item.slug,
       name: item.name,
       image: item.image,

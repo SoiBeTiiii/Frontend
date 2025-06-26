@@ -1,10 +1,10 @@
 "use client";
+
 import styles from "./Cart.module.css";
 import CartItem from "../components/CartItem";
-import { useState } from "react";
-// import ProductList from '../components/ProductListSlider';
 import ProductCardSmall from "../components/ProductCardSmall";
-
+import { useState } from "react";
+import { useCart } from "../context/CartConText";
 const recommendedProducts = [
   {
     id: 1,
@@ -33,19 +33,24 @@ const recommendedProducts = [
   {
     id: 4,
     image: "/images/prop.webp",
-        name: "Mascara Dài Mi Browit",
+    name: "Mascara Dài Mi Browit",
     price: 99000,
     originalPrice: 195000,
     discountPercent: 49,
   },
 ];
+
 export default function CartPage() {
+  const { increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+
   const [note, setNote] = useState("");
   const [invoice, setInvoice] = useState(false);
+  const { cart } = useCart();
 
-  const subtotal = 330000;
-  const discount = 95000;
-  const total = subtotal - discount;
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const originalTotal = cart.reduce((sum, item) => sum + item.originalPrice * item.quantity, 0);
+  const discount = originalTotal - subtotal;
+  const total = subtotal;
 
   return (
     <div className={styles.container}>
@@ -64,14 +69,18 @@ export default function CartPage() {
 
         <h2>Giỏ hàng:</h2>
         <hr className={styles.divider} />
-        <CartItem />
+
+        {cart.length === 0 ? (
+          <p>Giỏ hàng của bạn đang trống.</p>
+        ) : (
+          cart.map((item) => <CartItem key={item.id} product={item} />)
+        )}
 
         <h3 className={styles.recommendTitle}>Bạn có cần thêm?</h3>
-        {/* Gợi ý sản phẩm bên dưới */}
         <div className={styles.recommend}>
           {recommendedProducts.map((p) => (
             <ProductCardSmall key={p.id} product={p} />
-          ))}   
+          ))}
         </div>
       </div>
 
@@ -84,9 +93,7 @@ export default function CartPage() {
           </div>
           <div>
             <span>Giá giảm:</span>
-            <strong className={styles.discount}>
-              {discount.toLocaleString()}₫
-            </strong>
+            <strong className={styles.discount}>{discount.toLocaleString()}₫</strong>
           </div>
           <div>
             <span>Tổng cộng:</span>

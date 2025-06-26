@@ -13,7 +13,13 @@ export default function ProductListSlider() {
 
   useEffect(() => {
     fetchProducts()
-      .then(setProducts)
+      .then((data) => {
+        const productsWithId = data.map((item, index) => ({
+          ...item,
+          id: item.id ?? index, 
+        }));
+        setProducts(productsWithId);
+      })
       .catch((err) => {
         console.error('Lỗi khi fetch sản phẩm:', err);
       });
@@ -27,12 +33,24 @@ export default function ProductListSlider() {
     page * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
   );
-  console.log(process.env.NEXT_PUBLIC_API);
+
   return (
-    <div className={styles.wrapper}>
+    <>
+    <div className={styles.wrapper}>  
+      <h2 className={styles.title}>Sản phẩm nổi bật</h2>
       <div className={styles.grid}>
-        {visibleProducts.map((p, i) => (
-          <ProductCard key={i} {...p} />
+        {visibleProducts.map((p) => (
+          <ProductCard
+            key={p.id}
+            id={p.id}
+            slug={p.slug}
+            name={p.name}
+            price={p.price}
+            originalPrice={p.originalPrice}
+            image={p.image}
+            sold={p.sold}
+            discount={p.discount}
+          />
         ))}
       </div>
       <div className={styles.controls}>
@@ -41,6 +59,6 @@ export default function ProductListSlider() {
         <button className={styles.arrow} onClick={next}>→</button>
       </div>
     </div>
-    
+    </>
   );
 }

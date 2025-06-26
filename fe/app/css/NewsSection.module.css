@@ -31,3 +31,10 @@
 .button:hover {
   background-color: #db69a0;
 }
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+ 
+}

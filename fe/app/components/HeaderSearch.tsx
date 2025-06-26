@@ -5,8 +5,10 @@ import styles from "../css/HeaderSearch.module.css";
 import Link from "next/link";
 import CartDrawer from "./CartDrawer";
 import WishlistDrawer from "./WishlistDrawer";
-
+import { useCart } from "../context/CartConText";
+import MobileMenu from "./MobileMenu";
 import {
+  MdMenu,
   MdStore,
   MdEdit,
   MdPerson,
@@ -16,13 +18,14 @@ import {
 } from "react-icons/md";
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cart } = useCart();
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
   const [cartOpen, setCartOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
 
   return (
     <header className={styles.header}>
-      {/* Top bar */}
       <div className={styles.topBar}>
         <p>
           FRESHIAN TRANG ĐIỂM THUẦN CHAY CAO CẤP · FREESHIP 15K ĐƠN TỪ 199K ·
@@ -31,103 +34,127 @@ export default function Header() {
         </p>
       </div>
 
-      {/* Logo + Search + Icons */}
       <div className={styles.mainBar}>
+        <div
+          className={styles.menuIcon}
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <MdMenu size={24} />
+        </div>
+
         <div className={styles.logo}>EGOMall</div>
+
         <div className={styles.searchBox}>
           <input type="text" placeholder="FREESHIP 0Đ đơn từ 399K" />
-          <MdSearch
-            style={{
-              position: "absolute",
-              left: "12px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: "#888",
-            }}
-          />
+          <MdSearch className={styles.searchIcon} />
         </div>
+
         <div className={styles.iconList}>
           <div className={styles.iconItem}>
             <MdStore size={20} />
-            <p>Cửa hàng</p>
+            <span>Cửa hàng</span>
           </div>
           <Link href="/blog" className={styles.iconLink}>
             <div className={styles.iconItem}>
               <MdEdit size={20} />
-              <p>Blog</p>
+              <span>Blog</span>
             </div>
           </Link>
           <Link href="/login" className={styles.iconLink}>
             <div className={styles.iconItem}>
               <MdPerson size={20} />
-              <p>Đăng nhập</p>
+              <span>Đăng nhập</span>
             </div>
           </Link>
-
           <div
             className={styles.iconItem}
             onClick={() => setWishlistOpen(true)}
           >
             <MdFavorite size={20} />
-            <p>Đã thích</p>
+            <span>Đã thích</span>
           </div>
-
           <div className={styles.iconItem} onClick={() => setCartOpen(true)}>
-            <MdShoppingCart size={20} />
-            <p>Giỏ hàng</p>
+            <div className={styles.cartWrapper}>
+              <MdShoppingCart size={20} />
+              {totalQuantity > 0 && (
+                <span className={styles.cartBadge}>{totalQuantity}</span>
+              )}
+            </div>
+            <span>Giỏ hàng</span>
+          </div>
+        </div>
+        <div className={styles.mobileRight}>
+          <div
+            className={styles.iconItem}
+            onClick={() => setWishlistOpen(true)}
+          >
+            <MdFavorite size={20} />
+          </div>
+          <div className={styles.iconItem} onClick={() => setCartOpen(true)}>
+            <div className={styles.cartWrapper}>
+              <MdShoppingCart size={20} />
+              {totalQuantity > 0 && (
+                <span className={styles.cartBadge}>{totalQuantity}</span>
+              )}
+            </div>
           </div>
         </div>
       </div>
+      {/* Mobile Search Box */}
+      <div className={styles.mobileSearchBox}>
+        <input type="text" placeholder="FREESHIP 0Đ đơn từ 399K" />
+        <MdSearch className={styles.searchIcon} />
+      </div>
 
-      {/* Menu */}
       <nav className={styles.nav}>
         <ul>
           <Link href="/">
-            <li> Trang chủ </li>
+            <li>Trang chủ</li>
           </Link>
           <Link href="/products">
-            <li> Sản phẩm </li>
+            <li>Sản phẩm</li>
           </Link>
-          <Link href="/products">
-            <li className={styles.navItem}>
-              Trang điểm ⌄
-              <div className={styles.megaMenu}>
-                <div className={styles.megaColumn}>
-                  <h4>TRANG ĐIỂM MẶT</h4>
-                  <span>Kem Nền</span>
-                  <span>Kem Lót</span>
-                  <span>Che Khuyết Điểm</span>
-                  <span>Phấn Má Hồng</span>
-                  <span>Phấn Nước Cushion</span>
-                  <span>Phấn Phủ</span>
-                  <span>Tạo Khối</span>
-                  <span>Kem nền BB / CC</span>
-                </div>
-                <div className={styles.megaColumn}>
-                  <h4>TRANG ĐIỂM MÔI</h4>
-                  <span>Son Thỏi</span>
-                  <span>Son Tint | Son Kem</span>
-                  <span>Son Bóng</span>
-                  <span>Son Dưỡng Môi</span>
-                </div>
-                <div className={styles.megaColumn}>
-                  <h4>TRANG ĐIỂM MẮT</h4>
-                  <span>Mascara</span>
-                  <span>Kẻ Chân Mày</span>
-                  <span>Phấn Mắt</span>
-                  <span>Kẻ Viền Mắt</span>
-                </div>
+          <li className={styles.navItem}>
+            Trang điểm ⌄
+            <div className={styles.megaMenu}>
+              <div className={styles.megaColumn}>
+                <h4>TRANG ĐIỂM MẶT</h4>
+                <span>Kem Nền</span>
+                <span>Kem Lót</span>
+                <span>Kem Lót</span>
+                <span>Kem Lót</span>
+                <span>Kem Lót</span>
               </div>
-            </li>
-          </Link>
+              <div className={styles.megaColumn}>
+                <h4>TRANG ĐIỂM MÔI</h4>
+                <span>Son Thỏi</span>
+                <span>Son Thỏi</span>
+                <span>Son Thỏi</span>
+                <span>Son Thỏi</span>
+                <span>Son Thỏi</span>
+              </div>
+              <div className={styles.megaColumn}>
+                <h4>TRANG ĐIỂM MẮT</h4>
+                <span>Mascara</span>
+              </div>
+            </div>
+          </li>
           <li>Dưỡng da</li>
           <li>Chăm sóc cơ thể</li>
         </ul>
       </nav>
+
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-<WishlistDrawer isOpen={wishlistOpen} onClose={() => setWishlistOpen(false)} />
-
-
+      <WishlistDrawer
+        isOpen={wishlistOpen}
+        onClose={() => setWishlistOpen(false)}
+      />
+      {mobileMenuOpen && (
+        <MobileMenu
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+      )}
     </header>
   );
 }

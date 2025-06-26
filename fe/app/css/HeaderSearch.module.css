@@ -1,7 +1,13 @@
-/* components/Header.module.css */
-
+/* === Base Styles === */
 .header {
   font-family: sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .topBar {
@@ -18,47 +24,92 @@
   align-items: center;
   padding: 14px 20px;
   background-color: #fff;
+  height: 70px;
+  position: relative;
 }
 
 .logo {
-  margin-left: 8%;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
   color: #000;
 }
 
 .searchBox {
-  position: relative; /* Thêm dòng này */
+  position: relative;
+  margin-left: 100px;
 }
 
 .searchBox input {
-  width: 400px;
+  width: 450px;
+  height: 40px;
   color: black;
-  padding: 8px 12px 8px 36px; /* đẩy text sang phải để không đè icon */
+  padding: 8px 12px 8px 36px;
   border-radius: 20px;
   border: 1px solid #ddd;
   background-color: #f3f3f3;
   font-size: 14px;
 }
 
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
 
 .iconList {
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  align-items: center;
 }
 
 .iconItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  text-align: center;
   font-size: 12px;
   color: #000;
+  position: relative;
+}
+
+.iconItem:hover {
+  color: #ff66a6;
 }
 
 .iconItem span {
-  font-size: 18px;
+  font-size: 13px;
 }
 
+.iconItem svg {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.cartWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  background-color: red;
+  color: white;
+  padding: 2px 4.5px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+/* === Navigation === */
 .nav {
   background-color: #ff66a6;
   padding: 10px 20px;
@@ -79,7 +130,6 @@
 }
 
 .navItem {
-  /* position: relative; */
   position: static;
   cursor: pointer;
 }
@@ -88,10 +138,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-    width: 100vw;
-
-  right: 0;
-  width: 100vw; /* full chiều ngang */
+  width: 100vw;
   background-color: #ff66a6;
   display: flex;
   gap: 60px;
@@ -109,7 +156,6 @@
   transform: translateY(0);
 }
 
-/* Cột bên trong Mega Menu */
 .megaColumn {
   display: flex;
   flex-direction: column;
@@ -123,49 +169,147 @@
   margin-bottom: 10px;
 }
 
-
-.column {
-  flex: 1;
+/* === Mobile Specific === */
+.menuIcon {
+  display: none;
 }
 
-.column h4 {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 10px;
+.mobileRight {
+  display: none;
 }
 
-.column p {
-  font-size: 13px;
-  margin: 5px 0;
-  cursor: pointer;
+@media (max-width: 1024px) {
+  .logo {
+    font-size: 24px;
+    margin-left: 0;
+  }
+
+  .searchBox input {
+    width: 300px;
+  }
+
+  .iconList {
+    gap: 10px;
+  }
 }
 
-.column p:hover {
-  color: #ff66a6;
+@media (max-width: 768px) {
+  .mainBar {
+    justify-content: center;
+    padding: 10px 16px;
+    height: 60px;
+    position: relative;
+  }
+
+  .menuIcon {
+    display: block;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10001;
+  }
+
+  .logo {
+    font-size: 22px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .searchBox,
+  .iconList,
+  .nav {
+    display: none !important;
+  }
+
+  .mobileRight {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 12px;
+    align-items: center;
+    z-index: 10001;
+  }
+
+  .mobileRight .iconItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    color: #000;
+    
+  }
+
+  .topBar {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .cartBadge {
+    top: -6px;
+    right: -8px;
+    font-size: 9px;
+  }
 }
 
-.imageWrapper {
-  width: 200px;
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .searchBox input {
+    font-size: 12px;
+  }
+}
+.mobileRight {
+  display: none;
 }
 
-.imageWrapper img {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
+.mobileSearchBox {
+  display: none;
 }
 
+@media (max-width: 768px) {
+  .mobileRight {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 12px;
+    align-items: center;
+    z-index: 10001;
+  }
 
-.iconItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  color: #000;
-  gap: 4px;
-}
+  .mobileSearchBox {
+    display: flex;
+    padding: 10px 16px;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+  }
 
-.iconItem :global(svg) {
-  font-size: 20px;
+  .mobileSearchBox input {
+    flex: 1;
+    height: 40px;
+    border-radius: 20px;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #ddd;
+    background-color: #f3f3f3;
+    font-size: 14px;
+  }
+
+  .mobileSearchBox .searchIcon {
+    position: absolute;
+    left: 28px;
+    top: 80%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+  }
 }
