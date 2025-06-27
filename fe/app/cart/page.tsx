@@ -47,8 +47,14 @@ export default function CartPage() {
   const [invoice, setInvoice] = useState(false);
   const { cart } = useCart();
 
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const originalTotal = cart.reduce((sum, item) => sum + item.originalPrice * item.quantity, 0);
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const originalTotal = cart.reduce(
+    (sum, item) => sum + item.originalPrice * item.quantity,
+    0
+  );
   const discount = originalTotal - subtotal;
   const total = subtotal;
 
@@ -66,21 +72,15 @@ export default function CartPage() {
             <strong>Hỗ trợ đổi trả trong 7 ngày</strong>
           </div>
         </div>
+        <div className={styles.titlebox}>
+          <h2>Giỏ hàng:</h2>
+          <hr className={styles.divider} />
 
-        <h2>Giỏ hàng:</h2>
-        <hr className={styles.divider} />
-
-        {cart.length === 0 ? (
-          <p>Giỏ hàng của bạn đang trống.</p>
-        ) : (
-          cart.map((item) => <CartItem key={item.id} product={item} />)
-        )}
-
-        <h3 className={styles.recommendTitle}>Bạn có cần thêm?</h3>
-        <div className={styles.recommend}>
-          {recommendedProducts.map((p) => (
-            <ProductCardSmall key={p.id} product={p} />
-          ))}
+          {cart.length === 0 ? (
+            <p>Giỏ hàng của bạn đang trống.</p>
+          ) : (
+            cart.map((item) => <CartItem key={item.id} product={item} />)
+          )}
         </div>
       </div>
 
@@ -93,7 +93,9 @@ export default function CartPage() {
           </div>
           <div>
             <span>Giá giảm:</span>
-            <strong className={styles.discount}>{discount.toLocaleString()}₫</strong>
+            <strong className={styles.discount}>
+              {discount.toLocaleString()}₫
+            </strong>
           </div>
           <div>
             <span>Tổng cộng:</span>

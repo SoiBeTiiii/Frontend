@@ -2,12 +2,18 @@
   display: flex;
   gap: 32px;
   padding: 20px;
+  padding-top: 160px;
+  min-height: 900px
 }
 
 .left {
   flex: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border-radius: 20px;
 }
-
+.titlebox{
+  margin-left: 20px;
+}
 .right {
   flex: 1;
   background: #fff;
@@ -28,8 +34,9 @@
 }
 
 .divider {
+  /* margin-left: -20px; */
   border: 1px solid hotpink;
-  margin: 12px 0;
+  margin: 12px 0px 12px -20px;
 }
 
 .recommendTitle {

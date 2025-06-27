@@ -9,6 +9,8 @@
   justify-content: center;
   padding-top: 180px;
   gap: 32px;
+  z-index: 1;
+  position: relative;
 }
 
 

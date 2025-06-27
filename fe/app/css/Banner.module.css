@@ -1,0 +1,19 @@
+.slider {
+  position: relative;
+  width: 100%;
+  height: 250px; /* Hoặc chiều cao bạn muốn */
+  overflow: hidden;
+}
+
+.slideTrack {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+}

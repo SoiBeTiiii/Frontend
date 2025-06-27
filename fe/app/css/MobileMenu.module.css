@@ -5,13 +5,13 @@
   width: 80%;
   height: 100%;
   background-color: white;
-  z-index: 10001;
-  transition: all 0.3s ease-in-out;
+  z-index: 100011; /* cao hơn overlay */
+  transition: left 0.3s ease-in-out;
   padding: 16px;
   overflow-y: auto;
 }
 
-.open {
+.menuDrawer.open {
   left: 0;
 }
 
@@ -22,7 +22,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10000;
+  z-index: 100010; /* thấp hơn menuDrawer */
 }
 
 .menuHeader {

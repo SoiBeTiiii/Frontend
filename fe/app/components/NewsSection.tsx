@@ -23,6 +23,13 @@ const news = [
     month: 'THG 06',
     title: 'Thuê Villa vũng tàu giá rẻ ở đâu ? -77-78',
     description: 'Biển xanh, cát trắng, nắng vàng, một mùa hè sôi động nữa lại về và không có lý do gì chúng ta lại không lên kế hoạch du lịch Vũng Tàu ngay từ bây...',
+  },
+  {
+    image: '/images/prop.webp',
+    day: '07',
+    month: 'THG 06',
+    title: 'Thuê Villa vũng tàu giá rẻ ở đâu ? -77-78',
+    description: 'Biển xanh, cát trắng, nắng vàng, một mùa hè sôi động nữa lại về và không có lý do gì chúng ta lại không lên kế hoạch du lịch Vũng Tàu ngay từ bây...',
   }
 ];
 

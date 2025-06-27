@@ -1,0 +1,160 @@
+.checkoutContainer {
+  margin: 30px;
+  padding-top: 170px;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  font-family: "Inter", sans-serif;
+  background-color: #fff;
+  margin-bottom: 50px;
+}
+
+.grid {
+  display: flex;
+  gap: 2rem;
+}
+
+.left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section {
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 1.5rem;
+}
+
+.section h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loginPrompt {
+  font-size: 0.9rem;
+  color: #f05d5d;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input,
+.select,
+.textarea {
+  flex: 1;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+}
+
+.textarea {
+  resize: vertical;
+  height: 80px;
+  width: 100%;
+}
+
+.input[type="checkbox"],
+.input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #e91e63;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.paymentMethods label,
+.section label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.paymentMethods label:last-child,
+.section label:last-child {
+  border-bottom: none;
+}
+
+.paymentMethods img {
+  height: 20px;
+}
+
+.summaryBox {
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.summaryBox p {
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+
+.placeOrderBtn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.8rem;
+  background: #e91e63;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.voucher {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.voucher input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.voucher button {
+  padding: 0.6rem 1rem;
+  background: #000;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.error {
+  border: 1px solid red !important;
+}

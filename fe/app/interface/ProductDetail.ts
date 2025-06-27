@@ -1,8 +1,3 @@
-export interface ProductVariantOption {
-  name: string;
-  value: string;
-}
-
 export interface ProductVariant {
   id: number;
   sku: string;
@@ -10,7 +5,10 @@ export interface ProductVariant {
   sale_price: number;
   image: string;
   quantity: number;
-  options: ProductVariantOption[];
+  options: {
+    name: string;
+    value: string;
+  }[];
 }
 
 export interface ProductReview {
@@ -21,7 +19,7 @@ export interface ProductReview {
   date: string;
 }
 
-export interface ProductRelated {
+export interface RelatedProduct {
   id: number;
   name: string;
   slug: string;
@@ -44,5 +42,5 @@ export interface ProductDetail {
   review_count: number;
   reviews: ProductReview[];
   variants: ProductVariant[];
-  related: ProductRelated[];
+  related: RelatedProduct[];
 }

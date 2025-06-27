@@ -19,6 +19,13 @@ const blogData = [
     slug: 'my-pham-can-date',
   },
   {
+    image: '/images/blogs/blog2.webp',
+    title: 'Top 5 kem dưỡng ẩm cho da mịn màng tốt nhất hiện nay',
+    category: 'Góc Review',
+    excerpt: 'Danh sách kem dưỡng bán chạy, hiệu quả vượt mong đợi...',
+    slug: 'my-pham-can-date',
+  },
+  {
     image: '/images/blogs/blog1.webp',
     title: 'Top sữa rửa mặt dịu nhẹ, không gây khô da cho mùa hè 2025',
     category: 'Cách chăm sóc da',

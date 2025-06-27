@@ -78,6 +78,7 @@ export default function ProductDetailPage() {
     {product.related.map((rel, idx) => (
       <ProductCard
         key={idx}
+        id={rel.id}
         slug={rel.slug}
         name={rel.name}
         image={rel.image}
