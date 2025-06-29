@@ -465,6 +465,62 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
+.filter-sidebar {
+  width: 280px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.filter-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.filter-section label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 8px;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.filter-section input[type="checkbox"] {
+  accent-color: #e91e63; /* Hồng chủ đạo */
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 24px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .filter-title {
+    font-size: 16px;
+  }
+
+  .filter-section label {
+    font-size: 13px;
+  }
+}
+
 
 .footer-payment img {
   width: 68px;

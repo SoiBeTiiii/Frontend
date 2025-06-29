@@ -3,7 +3,7 @@
   justify-content: center;
   gap: 10px;
   padding: 8px 16px;
-  background: #d81b60;
+  background: linear-gradient(to right, #a4096d, #db3c9c);
   color: #fff;
   font-size: 1rem;
   border-radius: 6px;

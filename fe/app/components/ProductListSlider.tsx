@@ -50,6 +50,9 @@ export default function ProductListSlider() {
             image={p.image}
             sold={p.sold}
             discount={p.discount}
+            rating={p.rating}
+            type={p.type}
+            type_skin={p.type_skin}
           />
         ))}
       </div>

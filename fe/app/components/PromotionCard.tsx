@@ -14,6 +14,9 @@ export default function PromotionCard({
   originalPrice,
   image,
   sold,
+  rating,
+  type,
+  type_skin,
   discount
 
 }: ProductCardProps & { promotionName?: string; }) {

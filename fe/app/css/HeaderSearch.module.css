@@ -1,326 +1,416 @@
-/* === Base Styles === */
-.header {
-  font-family: sans-serif;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  will-change: transform;
-}
-.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-.hide {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
+  /* === Base Styles === */
+  .header {
+    font-family: sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    /* background: #fec7d7; */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    will-change: transform;
+  }
+  .show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .hide {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
 
-.topBar {
-  background-color: #e91e63;
-  color: white;
-  padding: 6px 20px;
-  font-size: 12px;
-  text-align: center;
-}
+  .topBar {
+    background-color: #a4096d;
+      /* background: linear-gradient(to right, #a4096d, #db3c9c); */
 
-.mainBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 20px;
-  background-color: #fff;
-  height: 70px;
-  position: relative;
-}
+    color: #fffffe;
+    padding: 6px 20px;
+    font-size: 12px;
+    text-align: center;
+  }
 
-.logo {
-  font-size: 30px;
-  font-weight: bold;
-  color: #000;
-}
+  .mainBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 110px;
+    background-color: #f9f8fc;
+    height: 70px;
+    position: relative;
+    
+  }
 
-.searchBox {
-  position: relative;
-  margin-left: 100px;
-}
-
-.searchBox input {
-  width: 450px;
-  height: 40px;
-  color: black;
-  padding: 8px 12px 8px 36px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background-color: #f3f3f3;
-  font-size: 14px;
-}
-
-.searchIcon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-}
-
-.iconList {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.iconItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  text-align: center;
-  font-size: 12px;
-  color: #000;
-  position: relative;
-}
-
-.iconItem:hover {
-  color: #ff66a6;
-}
-
-.iconItem span {
-  font-size: 13px;
-}
-
-.iconItem svg {
-  font-size: 24px;
-  margin-bottom: 4px;
-}
-
-.cartWrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cartBadge {
-  position: absolute;
-  top: -10px;
-  right: -20px;
-  background-color: red;
-  color: white;
-  padding: 2px 4.5px;
-  border-radius: 50%;
-  font-weight: bold;
-  font-size: 10px;
-}
-
-/* === Navigation === */
-.nav {
-  background-color: #ffffff;
-  padding: 10px 20px;
-  position: relative;
-  z-index: 100;
-}
-
-.nav ul {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  color: black;
-  font-weight: 500;
-  justify-content: center;
-}
-
-.navItem {
-  position: static;
-  cursor: pointer;
-}
-
-.megaMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100vw;
-  background-color: #ffffff;
-  display: flex;
-  gap: 60px;
-  padding: 30px 80px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-  z-index: 999;
-}
-
-.navItem:hover .megaMenu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.megaColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: black;
-  min-width: 180px;
-}
-
-.megaColumn h4 {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* === Mobile Specific === */
-.menuIcon {
-  display: none;
-}
-
-.mobileRight {
-  display: none;
-}
-
-@media (max-width: 1024px) {
   .logo {
-    font-size: 24px;
-    margin-left: 0;
+    /* margin-le */
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .searchBox {
+    position: relative;
+    margin-left: 100px;
   }
 
   .searchBox input {
-    width: 300px;
+    width: 450px;
+    height: 40px;
+    color: black;
+    padding: 8px 12px 8px 36px;
+    border-radius: 20px;
+    border: 1px solid #0e172c;
+    background-color: #d9d4e7;
+    font-size: 14px;
+  }
+
+  .searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0e172c;
+    font-weight: bold;
   }
 
   .iconList {
-    gap: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .mainBar {
-    justify-content: center;
-    padding: 10px 16px;
-    height: 60px;
-    position: relative;
-  }
-
-  .menuIcon {
-    display: block;
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 10001;
-  }
-
-  .logo {
-    font-size: 22px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .searchBox,
-  .iconList,
-  .nav {
-    display: none !important;
-  }
-
-  .mobileRight {
     display: flex;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    gap: 12px;
+    gap: 10px;
+    /* font-size: 11px; */
     align-items: center;
-    z-index: 10001;
+    font-weight: 550;
+    color: #0e172c;
+    /* background-color: ; */
   }
 
-  .mobileRight .iconItem {
+  .iconItem {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 64px;
+    text-align: center;
     font-size: 12px;
-    color: #000;
-    
+    color: #0e172c;
+    position: relative;
+  }
+
+  .iconItem:hover {
+    color: #ff66a6;
+  }
+
+  .iconItem span {
+    font-size: 13px;
+  }
+
+  .iconItem svg {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .cartWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* .cartBadge {
+    position: absolute;
+    top: -10px;
+    right: -20px;
+    background-color: red;
+    color: white;
+    padding: 2px 4.5px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 10px;
+  } */
+
+  /* === Navigation === */
+  .nav {
+    background-color: #f9f8fc;
+    padding: 13px 20px;
+    position: relative;
+    z-index: 100;
+    border-top:1px solid rgb(181, 181, 181);
+    box-shadow: 0 2px 6px rgba(69, 69, 69, 0.2);
+  }
+
+  .nav ul {
+    display: flex;
+    list-style: none;
+    gap: 70px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #0e172c;
+    /* font-weight: 550; */
+    justify-content: center;
+  }
+
+  .navItem {
+    position: static;
+    cursor: pointer;
+  }
+
+  .megaMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw;
+    background-color: #ffffff;
+    display: flex;
+    gap: 60px;
+    padding: 30px 80px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+
+  .navItem:hover .megaMenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .megaColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: black;
+    min-width: 180px;
+  }
+
+  .megaColumn h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* === Mobile Specific === */
+  .menuIcon {
+    display: none;
+  }
+
+  .mobileRight {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .logo {
+      font-size: 24px;
+      margin-left: 0;
+    }
+
+    .searchBox input {
+      width: 300px;
+    }
+
+    .iconList {
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mainBar {
+      justify-content: center;
+      padding: 10px 16px;
+      height: 60px;
+      position: relative;
+    }
+
+    .menuIcon {
+      display: block;
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 10001;
+    }
+
+    .logo {
+      font-size: 22px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .searchBox,
+    .iconList,
+    .nav {
+      display: none !important;
+    }
+
+    .mobileRight {
+      display: flex;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      gap: 12px;
+      align-items: center;
+      z-index: 10001;
+    }
+
+    .mobileRight .iconItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      font-size: 12px;
+      color: #000;
+      
+    }
+
+    .topBar {
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+
+    .cartBadge {
+      top: -6px;
+      right: -8px;
+      font-size: 9px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 20px;
+    }
+
+    .searchBox input {
+      font-size: 12px;
+    }
+  }
+  .mobileRight {
+    display: none;
+  }
+
+  .mobileSearchBox {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobileRight {
+      display: flex;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      gap: 12px;
+      align-items: center;
+      z-index: 10001;
+    }
+
+    .mobileSearchBox {
+      display: flex;
+      padding: 10px 16px;
+      background-color: white;
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobileSearchBox input {
+      flex: 1;
+      height: 40px;
+      border-radius: 20px;
+      padding: 8px 12px 8px 36px;
+      border: 1px solid #ddd;
+      background-color: #f3f3f3;
+      font-size: 14px;
+    }
+
+    .mobileSearchBox .searchIcon {
+      position: absolute;
+      left: 28px;
+      top: 80%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 18px;
+    }
+  } 
+  /* Laptop lớn (1440px–1600px) */
+@media (min-width: 1440px) {
+  .mainBar {
+    padding: 14px 120px;
+  }
+}
+
+/* Desktop rất lớn (1920px+) */
+@media (min-width: 1920px) {
+  .mainBar {
+    padding: 14px 200px;
+  }
+
+  .searchBox input {
+    width: 600px;
+  }
+
+  .iconItem {
+    width: 80px;
+    height: 70px;
+    font-size: 13px;
+  }
+
+  .iconItem svg {
+    font-size: 28px;
+  }
+}
+
+/* iPhone 13/14 (390px) */
+@media (max-width: 414px) {
+  .logo {
+    font-size: 18px;
+  }
+
+  .mobileRight .iconItem {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .mobileSearchBox input {
+    font-size: 13px;
+    height: 38px;
   }
 
   .topBar {
     font-size: 10px;
-    padding: 6px 10px;
-  }
-
-  .cartBadge {
-    top: -6px;
-    right: -8px;
-    font-size: 9px;
+    padding: 4px 8px;
   }
 }
 
-@media (max-width: 480px) {
+/* iPhone SE (320px) */
+@media (max-width: 360px) {
   .logo {
-    font-size: 20px;
+    font-size: 16px;
   }
 
-  .searchBox input {
-    font-size: 12px;
-  }
-}
-.mobileRight {
-  display: none;
-}
-
-.mobileSearchBox {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .mobileRight {
-    display: flex;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    gap: 12px;
-    align-items: center;
-    z-index: 10001;
-  }
-
-  .mobileSearchBox {
-    display: flex;
-    padding: 10px 16px;
-    background-color: white;
-    border-bottom: 1px solid #eee;
+  .mobileRight .iconItem {
+    width: 34px;
+    height: 34px;
+    font-size: 10px;
   }
 
   .mobileSearchBox input {
-    flex: 1;
-    height: 40px;
-    border-radius: 20px;
-    padding: 8px 12px 8px 36px;
-    border: 1px solid #ddd;
-    background-color: #f3f3f3;
-    font-size: 14px;
+    font-size: 12px;
+    padding: 6px 10px 6px 30px;
   }
 
   .mobileSearchBox .searchIcon {
-    position: absolute;
-    left: 28px;
-    top: 80%;
-    transform: translateY(-50%);
-    color: #888;
-    font-size: 18px;
+    left: 22px;
+    font-size: 16px;
+  }
+
+  .topBar {
+    font-size: 9px;
+    padding: 3px 6px;
   }
 }
+

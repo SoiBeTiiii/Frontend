@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import styles from "../css/HeaderSearch.module.css";
@@ -27,6 +28,23 @@ export default function Header() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
+
+    try {
+      // Nếu chỉ muốn redirect sang trang search có query param:
+      router.push(`/products?keyword=${encodeURIComponent(searchQuery)}`);
+
+      // Nếu muốn fetch kết quả và xử lý ngay tại header (ít dùng):
+      // const res = await baseAxios.get(`/search?keyword=${searchQuery}`);
+      // console.log("Search result:", res.data);
+    } catch (err) {
+      console.error("Lỗi khi tìm kiếm:", err);
+    }
+  };
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -45,12 +63,10 @@ export default function Header() {
   }, [lastScrollY]);
   return (
     <>
-     <VoucherNotifier />
+      <VoucherNotifier />
       <header
         className={`${styles.header} ${isVisible ? styles.show : styles.hide}`}
       >
-       
-
         <div className={styles.topBar}>
           <p>
             FRESHIAN TRANG ĐIỂM THUẦN CHAY CAO CẤP · FREESHIP 15K ĐƠN TỪ 199K ·
@@ -70,7 +86,15 @@ export default function Header() {
           <div className={styles.logo}>EGOMall</div>
 
           <div className={styles.searchBox}>
-            <input type="text" placeholder="FREESHIP 0Đ đơn từ 399K" />
+            <input
+              type="text"
+              placeholder="Tìm kiếm sản phẩm..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch();
+              }}
+            />
             <MdSearch className={styles.searchIcon} />
           </div>
 
@@ -108,6 +132,7 @@ export default function Header() {
               <span>Giỏ hàng</span>
             </div>
           </div>
+          
           <div className={styles.mobileRight}>
             <div
               className={styles.iconItem}
@@ -126,10 +151,7 @@ export default function Header() {
           </div>
         </div>
         {/* Mobile Search Box */}
-        <div className={styles.mobileSearchBox}>
-          <input type="text" placeholder="FREESHIP 0Đ đơn từ 399K" />
-          <MdSearch className={styles.searchIcon} />
-        </div>
+        
 
         <nav className={styles.nav}>
           <ul>
@@ -168,7 +190,21 @@ export default function Header() {
             <li>Chăm sóc cơ thể</li>
           </ul>
         </nav>
+        
+        <div className={styles.mobileSearchBox}>
+          <input
+            type="text"
+            placeholder="Tìm kiếm sản phẩm..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
+          />
+          <MdSearch className={styles.searchIcon} />
+        </div>
       </header>
+      
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       <WishlistDrawer
         isOpen={wishlistOpen}

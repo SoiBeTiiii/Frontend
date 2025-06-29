@@ -4,9 +4,9 @@ import Image from 'next/image';
 import styles from '../css/Banner.module.css';
 
 const images = [
-  '/banners/banner1.png',
-  '/banners/banner2.png',
-  '/banners/banner3.png',
+  '/images/banners/banner.png',
+  '/images/banners/section_hot_banner.webp',
+  '/images/banners/banner3.png',
 ]; // 📌 đặt file ảnh vào /public/banners/
 
 export default function Banner() {
@@ -21,6 +21,7 @@ export default function Banner() {
   }, []);
 
   return (
+    <div className={styles.bg}>
     <div className={styles.slider}>
       <div
         className={styles.slideTrack}
@@ -32,6 +33,7 @@ export default function Banner() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

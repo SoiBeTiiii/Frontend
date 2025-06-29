@@ -1,6 +1,6 @@
 // app/ClientLayout.tsx
 'use client';
-
+import Header from "./components/HeaderSearch";
 import { usePathname } from 'next/navigation';
 import HeaderSearch from './components/HeaderSearch';
 import Footer from './components/Footer';

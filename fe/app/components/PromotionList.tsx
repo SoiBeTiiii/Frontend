@@ -87,12 +87,15 @@ export default function ProductListSlider() {
             key={p.id}
             id={p.id}
             slug={p.slug ?? ''}
-            name={p.name}
-            price={p.price}
-            originalPrice={p.originalPrice}
-            image={p.image}
-            sold={p.sold}
-            discount={p.discount}
+            name={p.name ?? ''}
+            price={p.price ?? 0}
+            originalPrice={p.originalPrice ?? 0}
+            image={p.image ?? ''}
+            sold={p.sold ?? 0}
+            discount={p.discount ?? 0}
+            rating={p.rating ?? 0}
+            type={p.type ?? ''}
+            type_skin={p.type_skin ?? ''}
           />
         ))}
       </div>

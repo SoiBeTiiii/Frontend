@@ -1,6 +1,5 @@
-// components/BrandSlider.tsx
-'use client'
-import React, { useState } from 'react';
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../css/BrandSlider.module.css';
 import Image from 'next/image';
 
@@ -12,42 +11,56 @@ const brands = [
   '/images/brands/Sulwhasoo.webp',
   '/images/brands/PhysiogelLogo.webp',
   '/images/brands/CNPlogo.webp',
-    '/images/brands/Beiflogo.webp',
-
+  '/images/brands/Beiflogo.webp',
 ];
 
-const ITEMS_PER_SLIDE = 7;
+const ITEMS_PER_SLIDE = 5;
+const INTERVAL = 5000;
 
 export default function BrandSlider() {
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const next = () => {
-    setIndex((prev) =>
-      prev + ITEMS_PER_SLIDE >= brands.length ? 0 : prev + ITEMS_PER_SLIDE
-    );
-  };
+  const totalSlides = Math.ceil(brands.length / ITEMS_PER_SLIDE);
 
-  const prev = () => {
-    setIndex((prev) =>
-      prev - ITEMS_PER_SLIDE < 0 ? Math.max(0, brands.length - ITEMS_PER_SLIDE) : prev - ITEMS_PER_SLIDE
-    );
-  };
+  useEffect(() => {
+  intervalRef.current = setInterval(() => {
+    setIndex((prev) => {
+      const nextIndex = prev + 1;
+      return nextIndex >= totalSlides ? 0 : nextIndex;
+    });
+  }, INTERVAL);
 
-  const visibleBrands = brands.slice(index, index + ITEMS_PER_SLIDE);
+  return () => clearInterval(intervalRef.current!);
+}, [totalSlides]);
 
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>THƯƠNG HIỆU NỔI BẬT</h2>
       <div className={styles.sliderWrapper}>
-        <button className={styles.arrow} onClick={prev}>←</button>
-        <div className={styles.slider}>
-          {visibleBrands.map((src, i) => (
-            <div className={styles.brand} key={i}>
-              <Image src={src} alt={`Brand ${i}`} fill objectFit="contain" />
-            </div>
-          ))}
+        <div className={styles.sliderContainer}>
+          <div
+            className={styles.slider}
+            style={{
+              transform: `translateX(-${index * 100}%)`,
+            }}
+          >
+            {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+              <div className={styles.slide} key={slideIndex}>
+                {brands
+                  .slice(
+                    slideIndex * ITEMS_PER_SLIDE,
+                    slideIndex * ITEMS_PER_SLIDE + ITEMS_PER_SLIDE
+                  )
+                  .map((src, i) => (
+                    <div className={styles.brand} key={i}>
+                      <Image src={src} alt={`Brand ${i}`} fill objectFit="contain" />
+                    </div>
+                  ))}
+              </div>
+            ))}
+          </div>
         </div>
-        <button className={styles.arrow} onClick={next}>→</button>
       </div>
     </div>
   );
