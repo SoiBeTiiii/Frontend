@@ -37,7 +37,7 @@ export default function NewsSection() {
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>TIN TỨC LÀM ĐẸP</h2>
-      <div className={styles.grid}>
+      <div className={styles.Newgrid}>
         {news.map((n, i) => (
           <NewsCard key={i} {...n} />
         ))}

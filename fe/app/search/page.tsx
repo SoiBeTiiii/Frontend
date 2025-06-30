@@ -1,11 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import baseAxios from "../../lib/baseAxios";
-import ProductCard from "..//components/ProductCard";
+import ProductCard from "../components/ProductCard";
 import ProductCardProps from "../interface/ProductCardProps";
+import styles from "./SearchPage.module.css"; // CSS riêng cho search
 
 export default function SearchPage() {
   const [results, setResults] = useState<ProductCardProps[]>([]);
@@ -19,7 +19,7 @@ export default function SearchPage() {
       try {
         const res = await baseAxios.get(`/search?keyword=${keyword}`);
         const data = res.data as { data: ProductCardProps[] };
-        setResults(data.data); // sửa nếu API trả về khác
+        setResults(data.data);
       } catch (err) {
         console.error("Lỗi tìm kiếm:", err);
       }
@@ -29,9 +29,12 @@ export default function SearchPage() {
   }, [keyword]);
 
   return (
-    <div>
-      <h2>Kết quả cho: {keyword}</h2>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>
+        Có {results.length} kết quả cho: <span>{keyword}</span>
+      </h2>
+
+      <div className={styles.grid}>
         {results.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}

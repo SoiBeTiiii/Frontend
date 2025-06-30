@@ -57,3 +57,107 @@
   color: #555;
   line-height: 1.4;
 }
+
+/* === Responsive cho tất cả thiết bị === */
+
+/* iPhone SE - 320px */
+@media (max-width: 360px) {
+  .imageWrapper img {
+    height: 160px;
+  }
+
+  .content h3 {
+    font-size: 0.9rem;
+  }
+
+  .content p {
+    font-size: 0.8rem;
+  }
+
+  .date {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .date small {
+    font-size: 9px;
+  }
+}
+
+/* iPhone 13/14 - 390px */
+@media (max-width: 414px) {
+  .imageWrapper img {
+    height: 170px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+  }
+
+  .content p {
+    font-size: 0.85rem;
+  }
+}
+
+/* iPad Mini - 768px */
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+  }
+
+  .imageWrapper img {
+    height: 180px;
+  }
+
+  .content h3 {
+    font-size: 1.05rem;
+  }
+
+  .content p {
+    display: none;
+  }
+}
+
+/* iPad Pro - 1024px */
+@media (max-width: 1024px) {
+  .card {
+    max-width: 90%;
+  }
+
+  .imageWrapper img {
+    height: 190px;
+  }
+}
+
+/* Laptop nhỏ - 1280px */
+@media (max-width: 1280px) {
+  .card {
+    max-width: 300px;
+  }
+}
+
+/* Laptop lớn - 1440px trở lên */
+@media (min-width: 1440px) {
+  .card {
+    max-width: 320px;
+  }
+}
+
+/* Desktop lớn - 1920px trở lên */
+@media (min-width: 1920px) {
+  .card {
+    max-width: 340px;
+  }
+
+  .imageWrapper img {
+    height: 220px;
+  }
+
+  .content h3 {
+    font-size: 1.1rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+}

@@ -33,12 +33,12 @@ export default function RegisterPage() {
 
       if (res.success) {
         alert("Đăng ký thành công! Vui lòng kiểm tra email để xác nhận OTP");
-        localStorage.setItem("verify_email", email); // 🔧 luôn lưu email
+        localStorage.setItem("verify_email", email); 
         router.push("/verify-otp");
       } else {
         if (res.message?.includes("OTP đã được gửi")) {
           alert(res.message);
-          localStorage.setItem("verify_email", email); // ✅ vẫn lưu nếu OTP đã được gửi
+          localStorage.setItem("verify_email", email); 
           router.push("/verify-otp");
         } else {
           alert("Đăng ký thất bại: " + res.message);

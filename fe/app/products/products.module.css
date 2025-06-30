@@ -150,7 +150,7 @@ body {
   /* margin: 40px auto; */
   margin: 40px;
   margin-top: 100px;
-  gap: 40px;
+  /* gap: 40px; */
   padding-top:80px ;
   /* padding: 0 20px; */
 }
@@ -196,7 +196,10 @@ body {
 }
 
 .product-list {
-  flex: 1;
+  /* max-width:1200px; */
+    /* grid-template-columns: repeat(4, 1fr); */
+flex: 1;
+  /* grid-column: (1 1fr); */
 }
 
 .section-title {
@@ -208,8 +211,9 @@ body {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 50px;
+  /* grid-template-columns: repeat(auto-fill, minmax(4, 1fr));   chatGPT ít thôi   */
+    grid-template-columns: repeat(4, 1fr);
+  /* gap: 50px;      dư thùa      */
 }
 
 .product-card {

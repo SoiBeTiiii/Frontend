@@ -9,6 +9,7 @@ import WishlistDrawer from "./WishlistDrawer";
 import { useCart } from "../context/CartConText";
 import MobileMenu from "./MobileMenu";
 import VoucherNotifier from "../components/VoucherNotifier";
+import searchProducts from "../../lib/searchApi";
 
 import {
   MdMenu,
@@ -28,23 +29,28 @@ export default function Header() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  const [keyword, setKeyword] = useState("");
+  const [results, setResults] = useState([]);
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    if (!keyword.trim()) return;
 
     try {
-      // Nếu chỉ muốn redirect sang trang search có query param:
-      router.push(`/products?keyword=${encodeURIComponent(searchQuery)}`);
-
-      // Nếu muốn fetch kết quả và xử lý ngay tại header (ít dùng):
-      // const res = await baseAxios.get(`/search?keyword=${searchQuery}`);
-      // console.log("Search result:", res.data);
+      const data = await searchProducts(keyword);
+      setResults(data); // ✅ Hiển thị kết quả tại chỗ
     } catch (err) {
-      console.error("Lỗi khi tìm kiếm:", err);
+      console.error(err);
     }
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      // ✅ Nếu nhấn Enter → chuyển trang
+      router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -85,18 +91,26 @@ export default function Header() {
 
           <div className={styles.logo}>EGOMall</div>
 
-          <div className={styles.searchBox}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault(); // Ngăn reload
+              router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
+            }}
+            className={styles.searchBox}
+          >
             <input
               type="text"
               placeholder="Tìm kiếm sản phẩm..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSearch();
-              }}
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
-            <MdSearch className={styles.searchIcon} />
-          </div>
+            <MdSearch
+              className={styles.searchIcon}
+              onClick={handleSearch}
+              style={{ cursor: "pointer" }}
+            />
+          </form>
 
           <div className={styles.iconList}>
             <div className={styles.iconItem}>
@@ -112,7 +126,8 @@ export default function Header() {
             <Link href="/login" className={styles.iconLink}>
               <div className={styles.iconItem}>
                 <MdPerson size={20} />
-                <span>Đăng nhập</span>
+                <span>dang nhap</span>
+                {/* <span>{typeof window !== 'undefined' && localStorage.getItem("userName") || "Đăng nhập"}</span> */}
               </div>
             </Link>
             <div
@@ -132,7 +147,7 @@ export default function Header() {
               <span>Giỏ hàng</span>
             </div>
           </div>
-          
+
           <div className={styles.mobileRight}>
             <div
               className={styles.iconItem}
@@ -151,7 +166,6 @@ export default function Header() {
           </div>
         </div>
         {/* Mobile Search Box */}
-        
 
         <nav className={styles.nav}>
           <ul>
@@ -190,21 +204,37 @@ export default function Header() {
             <li>Chăm sóc cơ thể</li>
           </ul>
         </nav>
-        
-        <div className={styles.mobileSearchBox}>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault(); // Ngăn reload
+            router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
+          }}
+          className={styles.mobileSearchBox}
+        >
           <input
             type="text"
             placeholder="Tìm kiếm sản phẩm..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearch();
-            }}
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-          <MdSearch className={styles.searchIcon} />
-        </div>
+          <MdSearch
+            className={styles.searchIcon}
+            onClick={async () => {
+              if (!keyword.trim()) return;
+              try {
+                const data = await searchProducts(keyword);
+                setResults(data); // ✅ Hiện kết quả tại chỗ
+              } catch (err) {
+                console.error(err);
+              }
+            }}
+            style={{ cursor: "pointer" }}
+          />
+        </form>
       </header>
-      
+
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       <WishlistDrawer
         isOpen={wishlistOpen}

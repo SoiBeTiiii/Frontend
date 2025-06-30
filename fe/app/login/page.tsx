@@ -11,31 +11,38 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-const handleSocialLogin = async (provider: 'google' | 'facebook') => {
-  try {
-    const url = await getSocialRedirectUrl(provider);
-    if (url) {
-      window.location.href = url;
-    } else {
-      alert("Không lấy được URL đăng nhập từ server");
+  const handleSocialLogin = async (provider: "google" | "facebook") => {
+    try {
+      const url = await getSocialRedirectUrl(provider);
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert("Không lấy được URL đăng nhập từ server");
+      }
+    } catch (err) {
+      alert("Lỗi khi gọi API social login");
+      console.error(err);
     }
-  } catch (err) {
-    alert("Lỗi khi gọi API social login");
-    console.error(err);
-  }
-};
-
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const res = await login(email, password);
 
-      // Narrow the type of res before accessing its properties
       if (typeof res === "object" && res !== null && "success" in res) {
-        if ((res as { success: boolean; message?: string }).success) {
-          // Cookie đã được Laravel set rồi, không cần token
+        if (
+          (
+            res as {
+              success: boolean;
+              message?: string;
+              data?: { name?: string };
+            }
+          ).success
+        ) {
+          const userName =
+            (res as { data?: { name?: string } }).data?.name || "";
+          localStorage.setItem("userName", userName);
           router.push("/");
         } else {
           alert("Đăng nhập thất bại: " + (res as { message?: string }).message);
@@ -56,7 +63,7 @@ const handleSocialLogin = async (provider: 'google' | 'facebook') => {
           <h1>Chào mừng trở lại 👋</h1>
           <p>Khám phá các sản phẩm làm đẹp mới nhất từ EGOMall!</p>
 
-           <Link href='/'> Trang chủ </Link> 
+          <Link href="/"> Trang chủ </Link>
         </div>
 
         <form onSubmit={handleLogin} className={styles.form}>

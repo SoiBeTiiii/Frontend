@@ -15,10 +15,6 @@ type FilterParams = {
 
 export const fetchProducts = async (filters: FilterParams = {}): Promise<ProductCardProps[]> => {
   const searchParams = new URLSearchParams();
-  if (filters.keyword) {
-    searchParams.append("keyword", filters.keyword);
-  }
-
 
   if (filters.sort) searchParams.append("sort", filters.sort);
 
