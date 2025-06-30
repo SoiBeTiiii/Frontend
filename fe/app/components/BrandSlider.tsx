@@ -1,4 +1,3 @@
-// components/BrandSlider.tsx
 'use client'
 import React, { useState } from 'react';
 import styles from '../css/BrandSlider.module.css';
@@ -12,7 +11,7 @@ const brands = [
   '/images/brands/Sulwhasoo.webp',
   '/images/brands/PhysiogelLogo.webp',
   '/images/brands/CNPlogo.webp',
-    '/images/brands/Beiflogo.webp',
+  '/images/brands/Beiflogo.webp',
 
 ];
 

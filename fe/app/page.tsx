@@ -7,20 +7,20 @@ import BannerSlider from "./components/BannerSlider";
 import SuggestList from "./components/SuggestList";
 import BrandSlider from "./components/BrandSlider";
 import NewsSection from "./components/NewsSection";
-import IntroSlider from "./components/IntroSlider";
+import IntroSliders from "./components/IntroSlider";
 export default function Home() {
   return (
     <div>
-      <IntroSlider />
+      <IntroSliders />
 
       <PopularCategories /> 
 
       <ProductListSlider />
       {/* <ProductListSlider /> */}
       <ServiceInfo />
-      {/* <BannerSlider /> */}
+      <BannerSlider />
       <SuggestList />
-      <BrandSlider />
+      {/* <BrandSlider /> */}
       <NewsSection />
     </div>
   );

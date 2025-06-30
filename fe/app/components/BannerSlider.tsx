@@ -1,55 +1,52 @@
 'use client';
-
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../css/BannerSlider.module.css';
-
-const banners = [
-  {
-    image: 'images/slide1.webp',
-    alt: 'Sách hay giá hời',
-  },
-  {
-    image: 'images/slide2.webp',
-    alt: 'Chăm sóc ô tô',
-  },
-];
+import Image from 'next/image';
+import fetchBanners from '../../lib/bannersApi';
+import BannerProps from '../interface/banner';
 
 export default function BannerSlider() {
-  const [index, setIndex] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [banners, setBanners] = useState<BannerProps[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    timeoutRef.current = setTimeout(() => {
-      setIndex((prev) => (prev + 1) % banners.length);
-    }, 5000);
+    fetchBanners()
+      .then((result) => {
+        setBanners(result);
+      })
+      .catch((err) => {
+        console.error('Error fetching banners: ', err);
+      });
+  }, []);
 
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [index]);
+  const handleSelect = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   return (
     <div className={styles.sliderWrapper}>
-      <div
-        className={styles.sliderTrack}
-        style={{ transform: `translateX(-${index * 100}%)` }}
-      >
-        {banners.map((b, i) => (
-          <div key={i} className={styles.slide}>
-            <img src={b.image} alt={b.alt} className={styles.bannerImage} />
-          </div>
-        ))}
+      <div className={styles.sliderTrack}>
+        {banners.length > 0 && (
+          <Image
+            src={`/${banners[currentIndex].image || ''}`}
+            alt="Banner"
+            width={1200}
+            height={400}
+            className={styles.bannerImage}
+          />
+        )}
       </div>
 
       <div className={styles.dots}>
-        {banners.map((_, i) => (
+        {banners.map((_, index) => (
           <div
-            key={i}
-            className={`${styles.dot} ${i === index ? styles.active : ''}`}
-            onClick={() => setIndex(i)}
+            key={index}
+            className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}
+            onClick={() => handleSelect(index)}
           />
         ))}
       </div>
     </div>
   );
 }
+

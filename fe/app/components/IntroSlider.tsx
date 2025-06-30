@@ -1,17 +1,23 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../css/IntroSlider.module.css';
 import Image from 'next/image';
+import fetchIntroSliders from '../../lib/introSlidersApi';
+import IntroSliderProps from '../interface/introSlider';
 
-const villaImages = [
-  '/images/slide1.webp',
-  '/images/slide2.webp',
-  '/images/slide3.webp',
-  
-];
-
-export default function VillaSlider() {
+export default function IntroSliders() {
+  const [sliders, setSliders] = useState<IntroSliderProps[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    fetchIntroSliders()
+      .then((result) => {
+        setSliders(result);
+      })
+      .catch((err) => {
+        console.error('không kấy được banners: ', err);
+      });
+  }, []);
 
   const handleSelect = (index: number) => {
     setCurrentIndex(index);
@@ -22,32 +28,31 @@ export default function VillaSlider() {
       <div className={styles.left}>
         <h2>WELCOME TO</h2>
         <h1>EGOMALL</h1>
-        <p>
-          Hệ Thống Victory Villa tọa lạc tại những vị trí vàng gần biển Vũng Tàu. Victory Villa là hệ thống biệt thự nghỉ dưỡng cao cấp dành cho gia đình, nhóm bạn và đoàn khách yêu thích không gian riêng tư, thoáng đãng và đầy đủ tiện nghi.
-        </p>
+        <p>{sliders[currentIndex]?.description}</p>
         <button className={styles.button}>Xem chi tiết →</button>
       </div>
 
       <div className={styles.right}>
-        <div className={styles.imageWrapper}>
-          <Image
-          key={currentIndex}
-            src={villaImages[currentIndex]}
-            alt="Villa"
-            width={700}
-            height={500}
-            className={styles.mainImage}
-          />
-        </div>
+        {sliders.length > 0 && (
+          <div className={styles.imageWrapper}>
+            <Image
+              src={`/${sliders[currentIndex].image || ''}`}
+              alt="Intro Slider"
+              width={700}
+              height={500}
+              className={styles.mainImage}
+            />
+          </div>
+        )}
 
         <div className={styles.thumbnailRow}>
-          {villaImages.map((img, index) => (
+          {sliders.map((slider, index) => (
             <button
-              key={index}
+              key={slider.id}
               className={`${styles.thumb} ${currentIndex === index ? styles.active : ''}`}
               onClick={() => handleSelect(index)}
             >
-              <Image src={img} alt={`thumb-${index}`} width={100} height={70} />
+              <Image src={slider.image || '/images/default-thumb.webp'} alt={`thumb-${index}`} width={100} height={70} />
             </button>
           ))}
         </div>
@@ -55,3 +60,5 @@ export default function VillaSlider() {
     </div>
   );
 }
+
+
