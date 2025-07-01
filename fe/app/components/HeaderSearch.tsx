@@ -10,6 +10,7 @@ import { useCart } from "../context/CartConText";
 import MobileMenu from "./MobileMenu";
 import VoucherNotifier from "../components/VoucherNotifier";
 import searchProducts from "../../lib/searchApi";
+import { useAuth } from "../context/AuthContext";
 
 import {
   MdMenu,
@@ -22,6 +23,7 @@ import {
 } from "react-icons/md";
 
 export default function Header() {
+  const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart();
   const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -123,12 +125,26 @@ export default function Header() {
                 <span>Blog</span>
               </div>
             </Link>
-            <Link href="/login" className={styles.iconLink}>
-              <div className={styles.iconItem}>
-                <MdPerson size={20} />
-                <span>dang nhap</span>
+            {user ? (
+              <div className={styles.userDropdown}>
+                <div className={styles.iconItem}>
+                  <MdPerson size={20} />
+                  <span>{user.name}</span>
+                </div>
+                <div className={styles.dropdownContent}>
+                  <button onClick={logout} className={styles.logoutButton}>
+                    Đăng xuất
+                  </button>
+                </div>
               </div>
-            </Link>
+            ) : (
+              <Link href="/login" className={styles.iconLink}>
+                <div className={styles.iconItem}>
+                  <MdPerson size={20} />
+                  <span>Đăng nhập</span>
+                </div>
+              </Link>
+            )}
             <div
               className={styles.iconItem}
               onClick={() => setWishlistOpen(true)}

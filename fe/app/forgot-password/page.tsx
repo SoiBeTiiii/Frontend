@@ -1,35 +1,64 @@
 'use client';
 import { useState } from 'react';
 import styles from './ForgotPassword.module.css';
+import {
+  requestResetOTP,
+  verifyResetOTP,
+  resetPassword,
+} from '../../lib/authApi';
+import { useRouter } from "next/navigation";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
+
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Send OTP to:', email);
+const handleEmailSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await requestResetOTP(email);
+    const message = (res as { message?: string })?.message || "Mã OTP đã được gửi đến email.";
+    alert(message);
     setStep(2);
-  };
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Gửi OTP thất bại.");
+  }
+};
 
-  const handleOtpSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Verify OTP:', otp);
+const handleOtpSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await verifyResetOTP(email, otp);
+    const message = (res as { message?: string })?.message || "OTP xác minh thành công.";
+    alert(message);
     setStep(3);
-  };
+  } catch (err: any) {
+    alert(err.response?.data?.message || "OTP không hợp lệ.");
+  }
+};
 
-  const handleResetPassword = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      alert('Mật khẩu không khớp!');
-      return;
-    }
-    console.log('New password:', newPassword);
-    alert('Đặt lại mật khẩu thành công!');
-  };
+const handleResetPassword = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (newPassword !== confirmPassword) {
+    alert("Mật khẩu không khớp!");
+    return;
+  }
+
+  try {
+    const res = await resetPassword(email, otp, newPassword);
+    const message = (res as { message?: string })?.message || "Đặt lại mật khẩu thành công!";
+    alert(message);
+    // Chuyển hướng hoặc reset form
+   router.push("/login");
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Lỗi đặt lại mật khẩu.");
+  }
+};
+
 
   return (
     <div className={styles.container}>

@@ -41,3 +41,29 @@ export const getSocialRedirectUrl = async (provider: 'google' | 'facebook') => {
   const res = await axios.get<{ data: { url: string } }>(`http://localhost:8000/api/v1/auth/redirect/${provider}`);
   return res.data?.data?.url;
 };
+
+export const userInfo = async (): Promise<any> => {
+  const res = await authAxios.get<{ data: any }>("user", {
+    withCredentials: true,
+  });
+
+  return res.data.data; // chỉ lấy phần "data"
+};
+
+// Gửi OTP
+export const requestResetOTP = async (email: string) => {
+  const res = await authAxios.post("forgot-password", { email });
+  return res.data;
+};
+
+// Xác minh OTP
+export const verifyResetOTP = async (email: string, otp: string) => {
+  const res = await authAxios.post("verify-reset-otp", { email, otp });
+  return res.data;
+};
+
+// Đặt lại mật khẩu
+export const resetPassword = async (email: string, otp: string, password: string) => {
+  const res = await authAxios.post("set-new-password", { email, otp, new_password:password, new_password_confirmation: password, });
+  return res.data;
+};

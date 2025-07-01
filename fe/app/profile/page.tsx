@@ -1,14 +1,35 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
+import { userInfo } from '../../lib/authApi'; // nhớ import đúng path
 
 export default function ProfilePage() {
   const [form, setForm] = useState({
-    firstName: 'Hoài Nam',
-    lastName: 'Nam',
-    email: 'mainam531@gmail.com',
-    phone: '84762417475',
+    firstName: '',
+    email: '',
+    phone: '',
   });
+
+  const [fullName, setFullName] = useState(''); // cho sidebar
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await userInfo();
+        setForm({
+          firstName: user.name || '',
+          email: user.email || '',
+          phone: user.phone || '',
+        });
+        setFullName(user.name || '');
+      } catch (error) {
+        console.error("Lỗi lấy thông tin người dùng:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,7 +47,7 @@ export default function ProfilePage() {
       <aside className={styles.sidebar}>
         <div className={styles.card}>
           <div className={styles.avatar}>👤</div>
-          <strong>Hoài Nam Nam</strong>
+          <strong>{fullName}</strong>
         </div>
         <nav className={styles.menu}>
           <a className={styles.active}>Tài khoản</a>
@@ -44,10 +65,6 @@ export default function ProfilePage() {
             <div>
               <label>Tên *</label>
               <input name="firstName" value={form.firstName} onChange={handleChange} required />
-            </div>
-            <div>
-              <label>Họ *</label>
-              <input name="lastName" value={form.lastName} onChange={handleChange} required />
             </div>
             <div>
               <label>Email *</label>

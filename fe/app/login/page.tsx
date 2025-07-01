@@ -3,13 +3,16 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import Link from "next/link";
-import { getSocialRedirectUrl, login } from "../../lib/authApi";
+import { getSocialRedirectUrl, login, userInfo } from "../../lib/authApi";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { setUser } = useAuth();
+
 
   const handleSocialLogin = async (provider: "google" | "facebook") => {
     try {
@@ -25,36 +28,23 @@ export default function LoginPage() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await login(email, password);
+ const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-      if (typeof res === "object" && res !== null && "success" in res) {
-        if (
-          (
-            res as {
-              success: boolean;
-              message?: string;
-              data?: { name?: string };
-            }
-          ).success
-        ) {
-          const userName =
-            (res as { data?: { name?: string } }).data?.name || "";
-          localStorage.setItem("userName", userName);
-          router.push("/");
-        } else {
-          alert("Đăng nhập thất bại: " + (res as { message?: string }).message);
-        }
-      } else {
-        alert("Đăng nhập thất bại: Phản hồi không hợp lệ");
-      }
-    } catch (err) {
-      alert("Đăng nhập thất bại");
-      console.error(err);
+  try {
+    const res = await login(email, password);
+    // Narrow the type of res before accessing its properties
+    if ((res as any).success) {
+      const user = await userInfo();     // ✅ Lấy thông tin user sau login
+      setUser(user);                     // ✅ Cập nhật context
+      router.push("/");                  // ✅ Redirect
+    } else {
+      alert((res as any).message || "Đăng nhập thất bại");
     }
-  };
+  } catch (err) {
+    alert("Lỗi đăng nhập");
+  }
+};
 
   return (
     <div className={styles.container}>

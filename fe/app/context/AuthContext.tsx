@@ -1,38 +1,56 @@
-// "use client";
+"use client";
 
-// import { createContext, useContext, useState, useEffect } from "react";
 
-// interface AuthContextType {
-//   userName: string | null;
-//   userPhone: string | null;
-//   setUserName: (name: string | null) => void;
-//   logout: () => void;
-// }
+import { createContext, useContext, useEffect, useState } from "react";
+import { userInfo } from "../../lib/authApi"; // đường dẫn đúng
+import { useRouter } from "next/navigation";
+interface User {
+  name: string;
+  email: string;
+  role: string;
+  phone: string;
+}
 
-// const AuthContext = createContext<AuthContextType>({
-//   userName: null,
-//   setUserName: () => {},
-//   logout: () => {},
-// });
+interface AuthContextProps {
+  user: User | null;
+  setUser: (user: User | null) => void;
+  logout: () => void;
+}
 
-// export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-//   const [userName, setUserName] = useState<string | null>(null);
+const AuthContext = createContext<AuthContextProps>({
+  user: null,
+  setUser: () => {},
+  logout: () => {},
+});
 
-//   useEffect(() => {
-//     const storedName = localStorage.getItem("userName");
-//     if (storedName) setUserName(storedName);
-//   }, []);
 
-//   const logout = () => {
-//     localStorage.removeItem("userName");
-//     setUserName(null);
-//   };
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
-//   return (
-//     <AuthContext.Provider value={{ userName, setUserName, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  useEffect(() => {
+    // Gọi API lấy thông tin người dùng nếu đã đăng nhập
+    (async () => {
+      try {
+        const data = await userInfo();
+        setUser(data); // ✅ Lưu thông tin user vào context
+      } catch (err) {
+        setUser(null); // Nếu chưa đăng nhập hoặc lỗi thì clear user
+      }
+    })();
+  }, []);
 
-// export const useAuth = () => useContext(AuthContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    router.push("/login");
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);
