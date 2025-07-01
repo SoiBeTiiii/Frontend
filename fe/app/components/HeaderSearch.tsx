@@ -31,7 +31,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<any[]>([]);
 
   const handleSearch = async () => {
     if (!keyword.trim()) return;
@@ -127,7 +127,6 @@ export default function Header() {
               <div className={styles.iconItem}>
                 <MdPerson size={20} />
                 <span>dang nhap</span>
-                {/* <span>{typeof window !== 'undefined' && localStorage.getItem("userName") || "Đăng nhập"}</span> */}
               </div>
             </Link>
             <div
