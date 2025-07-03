@@ -84,8 +84,7 @@ export default function ProductDetailPage() {
         price={rel.sale_price}
         originalPrice={rel.price}
         sold={10}
-        discount={Math.round(100 - (rel.sale_price * 100) / rel.price)}
-      />
+        discount={Math.round(100 - (rel.sale_price * 100) / rel.price)} id={0}      />
     ))}
   </div>
 </section>

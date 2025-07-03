@@ -20,8 +20,8 @@ export default function Home() {
       <ServiceInfo />
       <BannerSlider />
       <SuggestList />
-      {/* <BrandSlider /> */}
-      <NewsSection />
+      <BrandSlider />
+      <NewsSection news={[]} />
     </div>
   );
 }
