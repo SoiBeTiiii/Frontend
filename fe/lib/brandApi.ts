@@ -10,12 +10,13 @@ export default async function fetchBrands(): Promise<BrandProps[]> {
             id: item.id,
             name: item.name,
             slug: item.slug,
-            image: item.image,
+            logo: item.image,
             description: item.description,
             is_active: item.is_active,
+            is_featured: item.is_featured,
             created_at: item.created_at,
             updated_at: item.updated_at,
-            link: item.link
+            delete_at: item.delete_at,
         } as BrandProps;
     });
     return result;

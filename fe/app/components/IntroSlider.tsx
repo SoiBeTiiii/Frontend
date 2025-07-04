@@ -2,17 +2,23 @@
 import { useState, useEffect } from 'react';
 import styles from '../css/IntroSlider.module.css';
 import Image from 'next/image';
-import fetchIntroSliders from '../../lib/introSlidersApi';
-import IntroSliderProps from '../interface/introSlider';
+import fetchSliders from '../../lib/introSlidersApi';
+import { Slider } from '../interface/introSlider';
+// import IntroSliderProps from '../interface/introSlider';
 
-export default function IntroSliders() {
-  const [sliders, setSliders] = useState<IntroSliderProps[]>([]);
+export default function Sliders() {
+  const [sliders, setSliders] = useState<Slider[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetchIntroSliders()
+    fetchSliders()
       .then((result) => {
-        setSliders(result);
+        if (Array.isArray(result)) {
+          setSliders(result);
+        } else {
+          setSliders([]);
+          console.error('fetchSliders did not return an array:', result);
+        }
       })
       .catch((err) => {
         console.error('không kấy được banners: ', err);
@@ -36,8 +42,8 @@ export default function IntroSliders() {
         {sliders.length > 0 && (
           <div className={styles.imageWrapper}>
             <Image
-              src={`/${sliders[currentIndex].image || ''}`}
-              alt="Intro Slider"
+              src={`/${sliders[currentIndex].images?.[0]?.image_url || ''}`}
+              alt="Intro Slider2q"
               width={700}
               height={500}
               className={styles.mainImage}
@@ -52,7 +58,7 @@ export default function IntroSliders() {
               className={`${styles.thumb} ${currentIndex === index ? styles.active : ''}`}
               onClick={() => handleSelect(index)}
             >
-              <Image src={slider.image || '/images/default-thumb.webp'} alt={`thumb-${index}`} width={100} height={70} />
+              <Image src={`{slider.images?.[0]?.image_url || '/images/default-thumb.webp'}`} alt={`thumb-${index}`} width={100} height={70} />
             </button>
           ))}
         </div>
@@ -60,5 +66,52 @@ export default function IntroSliders() {
     </div>
   );
 }
+
+
+// export function IntroSliders() {
+//   const [introsliders, setSliders] = useState<IntroSliderProps[]>([]);
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   useEffect(() => {
+//     fetchIntroSilders()
+//       .then((introslider) => {
+//         setSliders(introslider);
+//       })
+//       .catch((err) => {
+//         console.error('Error fetching introsliders: ', err);
+//       });
+//   }, []);
+
+//   const handleSelect = (index: number) => {
+//     setCurrentIndex(index);
+//   };
+
+//   return (
+//     <div className={styles.sliderWrapper}>
+//       <div className={styles.sliderTrack}>
+//         {introsliders.length > 0 && (
+//           <Image
+//             src={`/${introsliders[currentIndex].image || ''}`}
+//             alt="Intro Slideeeeeeeeeeeeeeeeeeeer"
+//             width={1200}
+//             height={400}
+//             className={styles.bannerImage}
+//           />
+//         )}
+//       </div>
+
+//       <div className={styles.dots}>
+//         {introsliders.map((_, index) => (
+//           <div
+//             key={index}
+//             className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}
+//             onClick={() => handleSelect(index)}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
 
 

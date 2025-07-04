@@ -1,11 +1,10 @@
 export default interface BannerProps {
     id: number;
-    name?: string;
-    slug: string;
-    image?: string;
-    description?: string;
-    is_active?: number;
-    created_at?: string;
-    updated_at?: string;
-    // link?: string;
+    title: string;
+    image_url?: string;
+    link_url?: string;
+    position?: string;
+    start_date?: string;
+    end_date?: string;
+    status?: number;
 }

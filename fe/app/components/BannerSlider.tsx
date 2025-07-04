@@ -28,7 +28,7 @@ export default function BannerSlider() {
       <div className={styles.sliderTrack}>
         {banners.length > 0 && (
           <Image
-            src={`/${banners[currentIndex].image || ''}`}
+            src={`/${banners[currentIndex].image_url || ''}`}
             alt="Banner"
             width={1200}
             height={400}

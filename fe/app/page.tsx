@@ -7,11 +7,13 @@ import BannerSlider from "./components/BannerSlider";
 import SuggestList from "./components/SuggestList";
 import BrandSlider from "./components/BrandSlider";
 import NewsSection from "./components/NewsSection";
-import IntroSliders from "./components/IntroSlider";
+import Sliders from "./components/IntroSlider";
+// import { IntroSliders } from './components/IntroSlider';
 export default function Home() {
   return (
     <div>
-      <IntroSliders />
+      <Sliders />
+      {/* <IntroSliders /> */}
 
       <PopularCategories /> 
 

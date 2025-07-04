@@ -48,7 +48,7 @@ export default function BrandSlider() {
         <div className={styles.slider}>
           {visibleBrands.map((brand, i) => (
             <div className={styles.brand} key={i}>
-              <Image src={brand.image ?? '/images/brands/default.png'} alt={brand.name ?? `Brand ${i}`} fill objectFit="contain" />
+              <Image src={`/${brand.logo ?? 'images/brands/default.png'}`} alt={brand.name ?? `Brand ${i}`} fill objectFit="contain" />
             </div>
           ))}
         </div>

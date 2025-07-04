@@ -34,6 +34,7 @@ export interface ProductRelated {
 }
 
 export interface ProductDetail {
+  description: ReactNode;
   id: number;
   name: string;
   slug: string;
