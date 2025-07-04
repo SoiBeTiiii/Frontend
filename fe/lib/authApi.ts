@@ -38,16 +38,20 @@ export const register = async (data: {
 };
 
 export const getSocialRedirectUrl = async (provider: 'google' | 'facebook') => {
-  const res = await axios.get<{ data: { url: string } }>(`http://localhost:8000/api/v1/auth/redirect/${provider}`);
-  return res.data?.data?.url;
+  const FE_CALLBACK = window.location.origin + "/social-callback";
+  const res = await authAxios.get<{ data: { url: string } }>(
+    `/redirect/${provider}?redirect=${encodeURIComponent(FE_CALLBACK)}`
+  );
+  return res.data.data.url;
 };
+
 
 export const userInfo = async (): Promise<any> => {
   const res = await authAxios.get<{ data: any }>("user", {
     withCredentials: true,
   });
 
-  return res.data.data; // chỉ lấy phần "data"
+  return res.data.data; 
 };
 
 // Gửi OTP
@@ -67,3 +71,4 @@ export const resetPassword = async (email: string, otp: string, password: string
   const res = await authAxios.post("set-new-password", { email, otp, new_password:password, new_password_confirmation: password, });
   return res.data;
 };
+

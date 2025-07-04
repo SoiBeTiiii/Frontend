@@ -1,25 +1,29 @@
 // app/social-callback/page.tsx
-'use client';
-import { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { userInfo } from "../../lib/authApi";
+import { useAuth } from "../context/AuthContext";
 
 export default function SocialCallbackPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const { setUser } = useAuth();
 
   useEffect(() => {
-    const token = searchParams.get('token');
-    const user = searchParams.get('user');
+    const fetchUser = async () => {
+      try {
+        const user = await userInfo(); 
+        setUser(user);
+        router.push("/");
+      } catch (err) {
+        console.error("Social login failed:", err);
+        router.push("/login"); 
+      }
+    };
 
-    if (token) {
-      localStorage.setItem('token', token); // hoặc lưu token vào context
-      alert('Đăng nhập bằng mạng xã hội thành công!');
-      router.push('/');
-    } else {
-      alert('Đăng nhập thất bại!');
-      router.push('/login');
-    }
-  }, [router, searchParams]);
+    fetchUser();
+  }, [router, setUser]);
 
-  return <p>Đang xác minh tài khoản...</p>;
+  return <p style={{ padding: "100px", textAlign: "center" }}>Đang xử lý đăng nhập...</p>;
 }

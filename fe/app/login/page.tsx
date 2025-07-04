@@ -13,7 +13,6 @@ export default function LoginPage() {
   const router = useRouter();
   const { setUser } = useAuth();
 
-
   const handleSocialLogin = async (provider: "google" | "facebook") => {
     try {
       const url = await getSocialRedirectUrl(provider);
@@ -28,23 +27,23 @@ export default function LoginPage() {
     }
   };
 
- const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  try {
-    const res = await login(email, password);
-    // Narrow the type of res before accessing its properties
-    if ((res as any).success) {
-      const user = await userInfo();     // ✅ Lấy thông tin user sau login
-      setUser(user);                     // ✅ Cập nhật context
-      router.push("/");                  // ✅ Redirect
-    } else {
-      alert((res as any).message || "Đăng nhập thất bại");
+    try {
+      const res = await login(email, password);
+      // Narrow the type of res before accessing its properties
+      if ((res as any).success) {
+        const user = await userInfo();
+        setUser(user); 
+        router.push("/");
+      } else {
+        alert((res as any).message || "Đăng nhập thất bại");
+      }
+    } catch (err) {
+      alert("Lỗi đăng nhập");
     }
-  } catch (err) {
-    alert("Lỗi đăng nhập");
-  }
-};
+  };
 
   return (
     <div className={styles.container}>

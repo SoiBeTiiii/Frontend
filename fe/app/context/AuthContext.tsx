@@ -1,9 +1,10 @@
 "use client";
 
-
-import { createContext, useContext, useEffect, useState } from "react";
-import { userInfo } from "../../lib/authApi"; // đường dẫn đúng
+import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { userInfo } from "../../lib/authApi";
 import { useRouter } from "next/navigation";
+import authAxios from "@/lib/authAxios";
+
 interface User {
   name: string;
   email: string;
@@ -23,27 +24,36 @@ const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
 });
 
-
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const hasRedirected = useRef(false);
+useEffect(() => {
+  (async () => {
+    try {
+      const data = await userInfo();
+      setUser(data);
+    } catch (err) {
+      setUser(null);
+    }
+  })();
+}, []);
 
   useEffect(() => {
-    // Gọi API lấy thông tin người dùng nếu đã đăng nhập
-    (async () => {
-      try {
-        const data = await userInfo();
-        setUser(data); // ✅ Lưu thông tin user vào context
-      } catch (err) {
-        setUser(null); // Nếu chưa đăng nhập hoặc lỗi thì clear user
-      }
-    })();
-  }, []);
+    if (user && !hasRedirected.current && window.location.pathname === "/login" ) {
+      hasRedirected.current = true;
+      router.push("/"); // ✅ tự push về trang chủ sau khi login social
+    }
+  }, [user, router]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
+  const logout = async () => {
+    try {
+      await authAxios.post("/logout");
+    } catch (error) {
+      console.error("logout fail", error);
+    }
     setUser(null);
-    router.push("/login");
+    router.push("/");
   };
 
   return (
