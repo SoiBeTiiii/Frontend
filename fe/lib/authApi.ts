@@ -38,9 +38,9 @@ export const register = async (data: {
 };
 
 export const getSocialRedirectUrl = async (provider: 'google' | 'facebook') => {
-  const FE_CALLBACK = window.location.origin + "/social-callback";
+  // const FE_CALLBACK = window.location.origin + "/social-callback";
   const res = await authAxios.get<{ data: { url: string } }>(
-    `/redirect/${provider}?redirect=${encodeURIComponent(FE_CALLBACK)}`
+    `/redirect/${provider}  `
   );
   return res.data.data.url;
 };
